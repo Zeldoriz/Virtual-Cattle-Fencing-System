@@ -1,0 +1,167 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Nanum Pen Script", cursive;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+:root {
+  --dark-gray: #383838;
+  --lighter-gray: #484848;
+  --strong-orange: #ff5400;
+  --text-white: #d2d2d2;
+  --text-white-header: #b5b5b5;
+  --hover-strong-orange: #c04000;
+  --hover-dark-gray: #2a2a2a;
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.text-white {
+  color: var(--text-white);
+}
+
+.dark-gray {
+  color: var(--dark-gray);
+}
+
+.strong-orange {
+  color: var(--strong-orange);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@50;100;200&display=swap");
+
+body {
+  overflow: hidden;
+  background-color: var(--dark-gray);
+}
+
+.logo-bar {
+  background-color: var(--strong-orange);
+  color: var(--text-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+  font-size: 15pt;
+  box-shadow: 0px 8px 17px 11px rgba(0, 0, 0, 0.2);
+}
+
+.login-section {
+  color: var(--text-white);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 70vh;
+  background-color: var(--lighter-gray);
+  box-shadow: 0px 8px 17px 11px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form-header {
+  color: var(--text-white-header);
+}
+
+form[action="/login"] > div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+form[action="/login"] > div > p {
+  font-size: 8pt;
+}
+
+form[action="/login"] input {
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  color: var(--text-white);
+  background-color: var(--strong-orange);
+  padding: 0.5em;
+  border-radius: 5px;
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: var(--hover-strong-orange);
+}
+
+input[type="text"],
+input[type="password"] {
+  color: var(--text-white);
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--text-white);
+}
+
+.input-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textboxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.textboxes p {
+  font-size: 8pt;
+}
+
+.left-login,
+.right-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.left-login {
+  gap: 20px;
+  width: 100%;
+}
+
+.right-login img {
+  height: 550px;
+  display: block;
+  margin: auto;
+}
