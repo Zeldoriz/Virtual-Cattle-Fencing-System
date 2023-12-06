@@ -24,7 +24,6 @@ function InitMap() {
   };
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-  //Drawing polygon
   var all_overlays = [];
   var selectedShape;
   var drawingManager = new google.maps.drawing.DrawingManager({
@@ -122,6 +121,11 @@ function InitMap() {
     controlUI.addEventListener("click", function () {
       deleteSelectedShape();
       checkShape = false;
+
+      //Update polygon status in express server
+      fetch("/api/delete-polygon", {
+        method: "POST",
+      });
     });
   }
 
@@ -138,7 +142,7 @@ function InitMap() {
     document.getElementById("polygon-coords").innerText = coordinates;
 
     //Post request to Express
-    const dataToSend = { key: coordinates };
+    const dataToSend = { coords: coordinates };
     fetch("/api/endpoint", {
       method: "POST",
       headers: {
@@ -195,7 +199,7 @@ function InitMap() {
     map,
     title: "GPS Location",
   });
-
+  marker.setMap(map);
   markers.push(marker);
 }
 
@@ -249,7 +253,12 @@ setInterval(() => {
     //Check if marker is within polygon
     if (checkShape) {
       const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
-      if (!isMarkerInPolygon) alert("Board is out of the fence!");
+      //Make more markers & functions for multi-board system
+      if (!isMarkerInPolygon)
+        if ($("#fence-alert").hasClass("hidden")) {
+          $("#fence-alert").toggleClass("hidden");
+          $(".alert-content p span").html(" 1 ");
+        }
     }
   });
 }, 3000);

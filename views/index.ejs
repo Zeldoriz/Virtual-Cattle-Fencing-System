@@ -13,6 +13,20 @@
   </head>
 
   <body>
+    <div id="fence-alert" class="hidden">
+      <div class="alert-window">
+        <div class="alert-header">
+          <b>ALERT!</b>
+        </div>
+        <div class="alert-content">
+          <p>Cow <span></span> is out of the fence!</p>
+          <div class="alert-button">
+            <button class="shadow" onclick="">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="body-flex">
       <!-- Navbar Section -->
       <div class="navbar">
@@ -103,7 +117,7 @@
       <!-- Control-bar Section -->
       <div class="map-control">
         <div class="map-control-header">
-          <div class="tab-arrow">
+          <div class="tab-arrow orange-hover">
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 448 512">
               <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
               <path
@@ -126,8 +140,8 @@
           </form>
 
           <div class="map-latlng-button-flex control-padding">
-            <button class="shadow" onclick="moveMarker()">Move!</button>
-            <button class="shadow" onclick="moveMarkerESP()">Get Board Location</button>
+            <button class="shadow orange-hover" onclick="moveMarker()">Move!</button>
+            <button class="shadow orange-hover" onclick="moveMarkerESP()">Get Board Location</button>
           </div>
         </div>
 
@@ -143,8 +157,8 @@
       type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrMSi1G5TZ8uCN1kyrlFCBsIgtmjWyDb4&libraries=drawing,geometry"
     ></script>
-    <script src="js/drawMap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/drawMap.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

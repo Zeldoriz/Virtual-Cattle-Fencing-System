@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 var temp = "";
 var loc = { lat: 23.89246790936712, lng: 121.54415209166598 };
+var polygon = { coords: [], checkPolygon: false };
 
 //Static directory
 app.use(express.static("public"));
@@ -80,11 +81,23 @@ app.get("/updateData", function (req, res) {
 
 // Endpoint to handle the incoming data from index.js
 app.post("/api/endpoint", (req, res) => {
-  const receivedData = req.body;
-  console.log("Data received from client:", receivedData);
+  polygon.coords = req.body.coords;
+  polygon.checkPolygon = true;
+  console.log("");
+  console.log("Geofence created!");
+  console.log("Polygon coordinates:", polygon);
 
   const responseData = { message: "Data received successfully" };
   res.json(responseData);
+});
+
+//Delete polygon
+app.post("/api/delete-polygon", function (req, res) {
+  polygon.checkPolygon = false;
+  polygon.coords = [];
+  console.log("");
+  console.log("Geofence deleted!");
+  console.log(polygon);
 });
 
 // Start the server

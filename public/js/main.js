@@ -21,3 +21,10 @@ fenceControls.click(function () {
 logOut.click(function () {
   window.location.href = "/logout";
 });
+
+var alertButton = $(".alert-button button"),
+  alertWindow = $("#fence-alert");
+
+alertButton.click(function () {
+  alertWindow.toggleClass("hidden");
+});

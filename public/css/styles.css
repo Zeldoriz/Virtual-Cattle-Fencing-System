@@ -40,6 +40,11 @@
   color: var(--strong-orange);
 }
 
+.orange-hover:hover {
+  background-color: var(--hover-strong-orange);
+  cursor: pointer;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@50;100;200&display=swap");
 
 body {
@@ -49,6 +54,54 @@ body {
 #body-flex {
   display: flex;
   flex-direction: row;
+}
+
+#fence-alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  background-color: rgb(41, 41, 41, 0.6);
+}
+
+.alert-window {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 20vh;
+  background-color: var(--dark-gray);
+  border-radius: 10px;
+  color: var(--text-white);
+}
+
+.alert-header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--strong-orange);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 5px 0;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.alert-button button {
+  background-color: var(--strong-orange);
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--text-white);
+  cursor: pointer;
 }
 
 .navbar,
@@ -134,10 +187,6 @@ body {
   height: 100%;
 }
 
-.tab-arrow:hover {
-  background-color: var(--hover-strong-orange);
-}
-
 .map-latlng-controls {
   display: flex;
   flex-direction: column;
@@ -182,13 +231,7 @@ input[type="text"] {
   padding: 5px;
   background-color: var(--strong-orange);
   color: var(--text-white);
-  font-weight: bold;
   border-radius: 5px;
-}
-
-.map-latlng-control button:hover {
-  background-color: var(--hover-strong-orange);
-  cursor: pointer;
 }
 
 #polygon-coords {
