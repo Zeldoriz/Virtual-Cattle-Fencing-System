@@ -26,5 +26,5 @@ var alertButton = $(".alert-button button"),
   alertWindow = $("#fence-alert");
 
 alertButton.click(function () {
-  alertWindow.removeClass("hidden");
+  alertWindow.addClass("hidden");
 });
