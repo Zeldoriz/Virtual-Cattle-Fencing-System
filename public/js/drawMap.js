@@ -256,7 +256,7 @@ setInterval(() => {
       //Make more markers & functions for multi-board system
       if (!isMarkerInPolygon)
         if ($("#fence-alert").hasClass("hidden")) {
-          $("#fence-alert").toggleClass("hidden");
+          $("#fence-alert").removeClass("hidden");
           $(".alert-content p span").html(" 1 ");
         }
     }
