@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 var temp = "";
+var posCount = 1;
+var posLog = [{ lat: 23.89246790936712, lng: 121.54415209166598, order: posCount }];
 var loc = { lat: 23.89246790936712, lng: 121.54415209166598 };
 var polygon = { coords: [], checkPolygon: false };
 
@@ -66,6 +68,11 @@ app.get("/send", function (req, res) {
     loc.lat = req.query.lat;
     loc.lng = req.query.lng;
     console.log(req.query);
+
+    posCount++;
+    let tempPos = { lat: parseFloat(req.query.lat), lng: parseFloat(req.query.lng), order: posCount };
+    posLog.push(tempPos);
+    console.log(posLog);
   }
 });
 
@@ -74,9 +81,18 @@ app.get("/get-loc", function (req, res) {
   res.json(loc);
 });
 
+//Pass table data to js file
+app.get("/get-tableData", function (req, res) {
+  res.json(posLog);
+});
+
 //Handle incoming manually updated data
 app.get("/updateData", function (req, res) {
   loc = req.query;
+  posCount++;
+  let tempPos = { lat: parseFloat(req.query.lat), lng: parseFloat(req.query.lng), order: posCount };
+  posLog.push(tempPos);
+  console.log(posLog);
 });
 
 // Endpoint to handle the incoming data from index.js

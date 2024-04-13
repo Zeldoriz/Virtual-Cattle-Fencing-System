@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KeepCow()</title>
+    <title>Virtual Fence</title>
     <link rel="stylesheet" href="css/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -150,12 +150,24 @@
           <span class="controls-header">Vertices of Polygon Fence:</span>
           <div id="polygon-coords"></div>
         </div>
+
+        <!-- Table Controls -->
+        <div class="map-pos-table control-padding control-item hidden">
+          <table>
+            <tr>
+              <th>Order</th>
+              <th class="table-coords-data">Latitude</th>
+              <th class="table-coords-data">Longitude</th>
+            </tr>
+            <tbody id="map-pos-table-data"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
     <script
       type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrMSi1G5TZ8uCN1kyrlFCBsIgtmjWyDb4&libraries=drawing,geometry"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm9Z8VmCnuxalMq5AkkTi0xqwdFEWQfXU&libraries=drawing,geometry"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/drawMap.js"></script>

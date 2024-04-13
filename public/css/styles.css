@@ -45,6 +45,27 @@
   cursor: pointer;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--dark-gray);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--strong-orange);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-strong-orange);
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@50;100;200&display=swap");
 
 body {
@@ -232,6 +253,16 @@ input[type="text"] {
   background-color: var(--strong-orange);
   color: var(--text-white);
   border-radius: 5px;
+}
+
+.map-pos-table {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.table-coords-data {
+  padding-left: 35px;
 }
 
 #polygon-coords {

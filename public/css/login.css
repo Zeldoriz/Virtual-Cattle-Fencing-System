@@ -152,7 +152,8 @@ input[type="password"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  height: 100%;
+  max-width: 50%;
 }
 
 .left-login {
@@ -161,7 +162,7 @@ input[type="password"] {
 }
 
 .right-login img {
-  height: 550px;
+  height: 100%;
   display: block;
   margin: auto;
 }

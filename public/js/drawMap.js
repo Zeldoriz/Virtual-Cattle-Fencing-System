@@ -256,9 +256,9 @@ setInterval(() => {
       //Make more markers & functions for multi-board system
       if (!isMarkerInPolygon)
         if ($("#fence-alert").hasClass("hidden")) {
-          $("#fence-alert").removeClass("hidden");
+          $("#fence-alert").toggleClass("hidden");
           $(".alert-content p span").html(" 1 ");
         }
     }
   });
-}, 3000);
+}, 1000);
