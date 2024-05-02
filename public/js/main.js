@@ -1,3 +1,7 @@
+function redirectCC() {
+  window.open("https://mxmmvwc3-5000.asse.devtunnels.ms/", "blank");
+}
+
 // Control Selectors
 var controlItem = $(".control-item"),
   mapLatLng = $(".map-latlng-control"),
@@ -37,8 +41,10 @@ alertButton.click(function () {
   alertWindow.toggleClass("hidden");
 });
 
+var table = document.getElementById("map-pos-table-data");
+var prevDataCount;
+
 function drawTable() {
-  var table = document.getElementById("map-pos-table-data");
   table.innerHTML = "";
   $.get("/get-tableData", function (data) {
     console.log(data);
@@ -49,9 +55,14 @@ function drawTable() {
                   <td class="table-coords-data">${parseFloat(data[i].lng).toFixed(5)}</td> 
                  </tr>`;
       table.innerHTML += row;
+      prevDataLength = data.length;
     }
   });
 }
 
-var prevTableData;
-setInterval(drawTable, 1000);
+drawTable();
+setInterval(function () {
+  $.get("/get-tableData", function (data) {
+    if (data.length != prevDataLength) drawTable();
+  });
+}, 1000);

@@ -1,7 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
+
 const app = express();
 const port = 3000;
+
 var temp = "";
 var posCount = 1;
 var posLog = [{ lat: 23.89246790936712, lng: 121.54415209166598, order: posCount }];
@@ -95,7 +97,7 @@ app.get("/updateData", function (req, res) {
   console.log(posLog);
 });
 
-// Endpoint to handle the incoming data from index.js
+//Post polygon coords handler
 app.post("/api/endpoint", (req, res) => {
   polygon.coords = req.body.coords;
   polygon.checkPolygon = true;
@@ -104,6 +106,16 @@ app.post("/api/endpoint", (req, res) => {
   console.log("Polygon coordinates:", polygon);
 
   const responseData = { message: "Data received successfully" };
+  res.json(responseData);
+});
+
+// Get polygon coords handler
+app.get("/api/get-overlay", (req, res) => {
+  console.log(polygon);
+  const responseData = {
+    coords: polygon.coords,
+    checkPolygon: polygon.checkPolygon,
+  };
   res.json(responseData);
 });
 
