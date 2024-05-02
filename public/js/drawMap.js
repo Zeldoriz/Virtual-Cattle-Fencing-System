@@ -27,16 +27,9 @@ function InitMap() {
   var all_overlays = [];
   var selectedShape;
   var drawingManager = new google.maps.drawing.DrawingManager({
-    // drawingMode: google.maps.drawing.OverlayType.MARKER,
-    // drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: [
-        // google.maps.drawing.OverlayType.MARKER,
-        // google.maps.drawing.OverlayType.CIRCLE,
-        google.maps.drawing.OverlayType.POLYGON,
-        // google.maps.drawing.OverlayType.RECTANGLE
-      ],
+      drawingModes: [google.maps.drawing.OverlayType.POLYGON],
     },
     markerOptions: {
       //icon: 'images/beachflag.png'
@@ -203,7 +196,40 @@ function InitMap() {
   markers.push(marker);
 }
 
+// Function to fetch stored overlay data from the server
+function fetchOverlayData() {
+  fetch("/api/get-overlay")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.checkPolygon === true) {
+        // Convert the coordinates to LatLng objects
+        polygonCoords = "";
+        //FIX THIS PART to make polygonCoords the lat and lng of a google map coordinates from the object:
+        // coords: [
+        //   '23.895038,121.539646',
+        //   '23.889074,121.538273',
+        //   '23.893508,121.541534'
+        // ],
+        console.log(polygonCoords);
+
+        const polygon = new google.maps.Polygon({
+          paths: polygonCoords,
+          map: map,
+          clickable: true,
+          draggable: false,
+          editable: true,
+          fillColor: "#ADFF2F",
+          fillOpacity: 0.5,
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching overlay data:", error);
+    });
+}
+
 InitMap();
+fetchOverlayData();
 
 //Move marker manually
 function moveMarker() {
@@ -236,7 +262,7 @@ function moveMarkerESP() {
 }
 
 //Auto refresh marker location
-setInterval(() => {
+setInterval(function () {
   $.get("/get-loc", function (data) {
     (lat = data.lat), (lng = data.lng);
     console.log(lat, lng);
@@ -249,16 +275,34 @@ setInterval(() => {
     prevLoc.lat = lat;
     prevLoc.lng = lng;
     console.log("Marker moved automatically!");
-
-    //Check if marker is within polygon
-    if (checkShape) {
-      const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
-      //Make more markers & functions for multi-board system
-      if (!isMarkerInPolygon)
-        if ($("#fence-alert").hasClass("hidden")) {
-          $("#fence-alert").toggleClass("hidden");
-          $(".alert-content p span").html(" 1 ");
-        }
-    }
   });
 }, 1000);
+
+//Notification handler
+function pushNotif(cowID) {
+  console.log(cowID);
+  const notification = new Notification("Virtual Fence", { body: "Cow " + cowID + " escaped!" });
+}
+
+//Check if marker is within polygon
+setInterval(function () {
+  if (checkShape) {
+    const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
+    //Make more cowIDs & functions for multi-board system
+    if (!isMarkerInPolygon) {
+      var cowID = 1;
+      if (Notification.permission === "granted") pushNotif(cowID);
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            pushNotif(cowID);
+          }
+        });
+      }
+      // if ($("#fence-alert").hasClass("hidden")) {
+      //   $("#fence-alert").toggleClass("hidden");
+      //   $(".alert-content p span").html(" 1 ");
+      // }
+    }
+  }
+}, 5000);
