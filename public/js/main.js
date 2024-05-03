@@ -1,7 +1,3 @@
-function redirectCC() {
-  window.open("https://mxmmvwc3-5000.asse.devtunnels.ms/", "blank");
-}
-
 // Control Selectors
 var controlItem = $(".control-item"),
   mapLatLng = $(".map-latlng-control"),
@@ -41,28 +37,20 @@ alertButton.click(function () {
   alertWindow.toggleClass("hidden");
 });
 
-var table = document.getElementById("map-pos-table-data");
-var prevDataCount;
-
 function drawTable() {
+  var table = document.getElementById("map-pos-table-data");
   table.innerHTML = "";
   $.get("/get-tableData", function (data) {
-    console.log(data);
     for (var i = 0; i < data.length; i++) {
       var row = `<tr> 
-                  <td>${data[i].order}</td> 
-                  <td class="table-coords-data">${parseFloat(data[i].lat).toFixed(5)}</td> 
-                  <td class="table-coords-data">${parseFloat(data[i].lng).toFixed(5)}</td> 
+                  <td class="table-coords-data">${data[i].board_number}</td> 
+                  <td class="table-coords-data">${parseFloat(data[i].lat).toFixed(6)}</td> 
+                  <td class="table-coords-data">${parseFloat(data[i].lng).toFixed(6)}</td> 
                  </tr>`;
       table.innerHTML += row;
-      prevDataLength = data.length;
     }
   });
 }
 
-drawTable();
-setInterval(function () {
-  $.get("/get-tableData", function (data) {
-    if (data.length != prevDataLength) drawTable();
-  });
-}, 1000);
+var prevTableData;
+setInterval(drawTable, 1000);
