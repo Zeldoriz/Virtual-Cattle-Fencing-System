@@ -207,14 +207,6 @@ function InitMap() {
       markers[data[i].board_number] = (marker);
     }
   });
-  //Initialize marker
-  // marker = new google.maps.Marker({
-  //   position: location,
-  //   map,
-  //   title: "GPS Location",
-  // });
-  // marker.setMap(map);
-  // markers.push(marker);
 }
 
 InitMap();
