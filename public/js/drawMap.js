@@ -4,7 +4,7 @@ var map;
 var newShape = {};
 var checkShape = false;
 
-var prevLoc = {lat: 0, lng: 0};
+var prevLoc = { lat: 0, lng: 0 };
 var lat, lng;
 var marker;
 var markers = [];
@@ -319,8 +319,10 @@ setInterval(() => {
     }
 
     console.log("Marker moved automatically!");
+  });
+}, 1000);
 
-    //Notification handler
+//Notification handler
 function pushNotif(cowID) {
   console.log(cowID);
   const notification = new Notification("Virtual Fence", { body: "Cow " + cowID + " escaped!" });
