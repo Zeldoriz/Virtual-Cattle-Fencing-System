@@ -204,7 +204,40 @@ function InitMap() {
   });
 }
 
+// Function to fetch stored overlay data from the server
+function fetchOverlayData() {
+  fetch("/api/get-overlay")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.checkPolygon === true) {
+        // Convert the coordinates to LatLng objects
+        polygonCoords = "";
+        //FIX THIS PART to make polygonCoords the lat and lng of a google map coordinates from the object:
+        // coords: [
+        //   '23.895038,121.539646',
+        //   '23.889074,121.538273',
+        //   '23.893508,121.541534'
+        // ],
+        console.log(polygonCoords);
+
+        const polygon = new google.maps.Polygon({
+          paths: polygonCoords,
+          map: map,
+          clickable: true,
+          draggable: false,
+          editable: true,
+          fillColor: "#ADFF2F",
+          fillOpacity: 0.5,
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching overlay data:", error);
+    });
+}
+
 InitMap();
+fetchOverlayData()
 
 //Move marker manually
 function moveMarker() {
