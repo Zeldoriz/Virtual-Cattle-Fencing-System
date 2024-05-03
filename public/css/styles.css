@@ -276,7 +276,7 @@ input[type="text"] {
   width: 100%;
   height: min-content;
   word-wrap: break-word;
-  color: red;
+  color: var(--text-white);
   font-size: 14px;
 }
 
