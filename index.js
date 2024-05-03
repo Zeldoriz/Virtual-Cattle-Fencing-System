@@ -137,6 +137,16 @@ app.post("/api/endpoint", (req, res) => {
   res.json(responseData);
 });
 
+// Get polygon coords handler
+app.get("/api/get-overlay", (req, res) => {
+  console.log(polygon);
+  const responseData = {
+    coords: polygon.coords,
+    checkPolygon: polygon.checkPolygon,
+  };
+  res.json(responseData);
+});
+
 //Delete polygon
 app.post("/api/delete-polygon", function (req, res) {
   polygon.checkPolygon = false;
