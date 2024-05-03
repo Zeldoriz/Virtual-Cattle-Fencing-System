@@ -4,7 +4,7 @@ var map;
 var newShape = {};
 var checkShape = false;
 
-var prevLoc = {};
+var prevLoc = {lat: 0, lng: 0};
 var lat, lng;
 var marker;
 var markers = [];
@@ -27,15 +27,10 @@ function InitMap() {
   var all_overlays = [];
   var selectedShape;
   var drawingManager = new google.maps.drawing.DrawingManager({
-    // drawingMode: google.maps.drawing.OverlayType.MARKER,
-    // drawingControl: true,
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
       drawingModes: [
-        // google.maps.drawing.OverlayType.MARKER,
-        // google.maps.drawing.OverlayType.CIRCLE,
         google.maps.drawing.OverlayType.POLYGON,
-        // google.maps.drawing.OverlayType.RECTANGLE
       ],
     },
     markerOptions: {
