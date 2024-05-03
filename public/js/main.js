@@ -1,3 +1,7 @@
+function redirectCC() {
+  window.open("https://mxmmvwc3-5000.asse.devtunnels.ms/", "blank");
+}
+
 // Control Selectors
 var controlItem = $(".control-item"),
   mapLatLng = $(".map-latlng-control"),
