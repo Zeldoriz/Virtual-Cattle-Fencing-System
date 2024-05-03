@@ -320,15 +320,31 @@ setInterval(() => {
 
     console.log("Marker moved automatically!");
 
-    //Check if marker is within polygon
-    if (checkShape) {
-      const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
-      //Make more markers & functions for multi-board system
-      if (!isMarkerInPolygon)
-        if ($("#fence-alert").hasClass("hidden")) {
-          $("#fence-alert").toggleClass("hidden");
-          $(".alert-content p span").html(" 1 ");
-        }
+    //Notification handler
+function pushNotif(cowID) {
+  console.log(cowID);
+  const notification = new Notification("Virtual Fence", { body: "Cow " + cowID + " escaped!" });
+}
+
+//Check if marker is within polygon
+setInterval(function () {
+  if (checkShape) {
+    const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
+    //Make more cowIDs & functions for multi-board system
+    if (!isMarkerInPolygon) {
+      var cowID = 1;
+      if (Notification.permission === "granted") pushNotif(cowID);
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            pushNotif(cowID);
+          }
+        });
+      }
+      // if ($("#fence-alert").hasClass("hidden")) {
+      //   $("#fence-alert").toggleClass("hidden");
+      //   $(".alert-content p span").html(" 1 ");
+      // }
     }
-  });
-}, 1000);
+  }
+}, 5000);
