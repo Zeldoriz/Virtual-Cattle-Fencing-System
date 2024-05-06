@@ -11,9 +11,9 @@ dotenv.config()
 
 const pool = mysql.createPool({
     host: 'localhost',
-    port: '3306',
+    port: '3000',
     user: 'root',
-    password: 'christopher1410',
+    password: 'rootdb',
     database: 'my_database'
 }).promise()
 

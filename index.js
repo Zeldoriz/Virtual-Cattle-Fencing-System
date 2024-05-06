@@ -112,7 +112,6 @@ app.get("/get-loc", function (req, res) {
 //Pass table data to js file
 app.get("/get-tableData", async function (req, res) {
   const data = await lib.getAllLastData();
-  console.log(data);
   res.json(data);
 });
 
