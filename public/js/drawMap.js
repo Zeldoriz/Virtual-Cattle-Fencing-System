@@ -4,7 +4,7 @@ var map;
 var newShape = {};
 var checkShape = false;
 
-var prevLoc = { lat: 0, lng: 0 };
+var prevLoc = [];
 var lat, lng;
 var marker;
 var markers = [];
@@ -29,9 +29,7 @@ function InitMap() {
   var drawingManager = new google.maps.drawing.DrawingManager({
     drawingControlOptions: {
       position: google.maps.ControlPosition.TOP_CENTER,
-      drawingModes: [
-        google.maps.drawing.OverlayType.POLYGON,
-      ],
+      drawingModes: [google.maps.drawing.OverlayType.POLYGON],
     },
     markerOptions: {
       //icon: 'images/beachflag.png'
@@ -190,16 +188,15 @@ function InitMap() {
 
   //Initialize marker
   $.get("/get-tableData", function (data) {
-
     for (i = 0; i < 5; i++) {
       prevLoc[i] = { lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng) };
       var marker = new google.maps.Marker({
         position: { lat: data[i].lat, lng: data[i].lng },
         map,
-        label: { color: '#000000', fontWeight: 'bold', fontSize: '14px', text: 'Board ' + data[i].board_number },
+        label: { color: "#000000", fontWeight: "bold", fontSize: "14px", text: "Board " + data[i].board_number },
       });
       marker.setMap(map);
-      markers[data[i].board_number] = (marker);
+      markers[data[i].board_number] = marker;
     }
   });
 }
@@ -237,7 +234,7 @@ function fetchOverlayData() {
 }
 
 InitMap();
-fetchOverlayData()
+fetchOverlayData();
 
 //Move marker manually
 function moveMarker() {
@@ -251,7 +248,7 @@ function moveMarker() {
 
   let tempLoc = { lat: lat, lng: lng };
   //Update gps data in server
-  $.get("/updateData", tempLoc, function () { });
+  $.get("/updateData", tempLoc, function () {});
 
   console.log("Marker moved manually!");
 }
@@ -269,55 +266,26 @@ function moveMarkerESP() {
   });
 }
 
-//Auto refresh marker location
-// setInterval(() => {
-//   $.get("/get-loc", function (data) {
-//     (lat = data.lat), (lng = data.lng);
-//     console.log(lat, lng);
-//     var newLoc = new google.maps.LatLng(lat, lng);
-//     if (prevLoc.lat != lat || prevLoc.lng != lng) {
-//       map.setCenter(newLoc);
-//     }
-//     marker.setPosition(newLoc);
-
-//     prevLoc.lat = lat;
-//     prevLoc.lng = lng;
-//     console.log("Marker moved automatically!");
-
-//     //Check if marker is within polygon
-//     if (checkShape) {
-//       const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
-//       //Make more markers & functions for multi-board system
-//       if (!isMarkerInPolygon)
-//         if ($("#fence-alert").hasClass("hidden")) {
-//           $("#fence-alert").toggleClass("hidden");
-//           $(".alert-content p span").html(" 1 ");
-//         }
-//     }
-//   });
-// }, 1000);
-
-
 async function updateMarker(newmarker, local_board_number, the_map) {
   const marker = new google.maps.Marker({
-    map: the_map, position: { lat: newmarker.lat, lng: newmarker.lng }, label: { color: '#000000', fontWeight: 'bold', fontSize: '14px', text: 'Board ' + local_board_number }
+    map: the_map,
+    position: { lat: newmarker.lat, lng: newmarker.lng },
+    label: { color: "#000000", fontWeight: "bold", fontSize: "14px", text: "Board " + local_board_number },
   });
   marker.setMap(the_map);
-  marker_arr[local_board_number] = marker;
+  markers[local_board_number] = marker;
   console.log("Adding marker");
 }
 
 setInterval(() => {
   $.get("/get-tableData", function (data) {
-
     for (i = 0; i < 5; i++) {
       if (data[i].lat != prevLoc[i].lat || data[i].lng != prevLoc[i].lng) {
         markers[data[i].board_number].setMap(null);
         prevLoc[i] = { lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng) };
-        updateMarker(data[i], data[i].board_number, map)
+        updateMarker(data[i], data[i].board_number, map);
       }
     }
-
     console.log("Marker moved automatically!");
   });
 }, 1000);
@@ -325,28 +293,28 @@ setInterval(() => {
 //Notification handler
 function pushNotif(cowID) {
   console.log(cowID);
-  const notification = new Notification("Virtual Fence", { body: "Cow " + cowID + " escaped!" });
+  const notification = new Notification("Virtual Fence", { body: cowID + " escaped!" });
 }
 
 //Check if marker is within polygon
 setInterval(function () {
   if (checkShape) {
-    const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(marker.getPosition(), newShape);
-    //Make more cowIDs & functions for multi-board system
-    if (!isMarkerInPolygon) {
-      var cowID = 1;
-      if (Notification.permission === "granted") pushNotif(cowID);
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            pushNotif(cowID);
-          }
-        });
+    console.log(markers);
+    markers.forEach(function (tempMarker) {
+      console.log(tempMarker);
+      const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(tempMarker.getPosition(), newShape);
+      console.log(isMarkerInPolygon);
+      if (!isMarkerInPolygon) {
+        var cowID = tempMarker.label.text;
+        if (Notification.permission === "granted") pushNotif(cowID);
+        else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              pushNotif(cowID);
+            }
+          });
+        }
       }
-      // if ($("#fence-alert").hasClass("hidden")) {
-      //   $("#fence-alert").toggleClass("hidden");
-      //   $(".alert-content p span").html(" 1 ");
-      // }
-    }
+    });
   }
 }, 5000);

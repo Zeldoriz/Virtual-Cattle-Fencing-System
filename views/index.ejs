@@ -1,173 +1,184 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>MiLK | Virtual Fencing</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100;1,400&family=Nanum+Pen+Script&family=Poppins:wght@200&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <title>MiLK | Virtual Fencing</title>
-  <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100;1,400&family=Nanum+Pen+Script&family=Poppins:wght@200&display=swap"
-    rel="stylesheet" />
-</head>
-
-<body>
-  <div id="fence-alert" class="hidden">
-    <div class="alert-window">
-      <div class="alert-header">
-        <b>ALERT!</b>
-      </div>
-      <div class="alert-content">
-        <p>Cow <span></span> is out of the fence!</p>
-        <div class="alert-button">
-          <button class="shadow" onclick="">Confirm</button>
+  <body>
+    <div id="fence-alert" class="hidden">
+      <div class="alert-window">
+        <div class="alert-header">
+          <b>ALERT!</b>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="body-flex">
-    <!-- Navbar Section -->
-    <div class="navbar">
-      <div class="web-logo">
-        <p>Virtual</p>
-        <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 640 512">
-          <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-          <path fill="#d2d2d2"
-            d="M96 224v32V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V327.8c9.9 6.6 20.6 12 32 16.1V368c0 8.8 7.2 16 16 16s16-7.2 16-16V351.1c5.3 .6 10.6 .9 16 .9s10.7-.3 16-.9V368c0 8.8 7.2 16 16 16s16-7.2 16-16V343.8c11.4-4 22.1-9.4 32-16.1V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V256l32 32v49.5c0 9.5 2.8 18.7 8.1 26.6L530 427c8.8 13.1 23.5 21 39.3 21c22.5 0 41.9-15.9 46.3-38l20.3-101.6c2.6-13-.3-26.5-8-37.3l-3.9-5.5V184c0-13.3-10.7-24-24-24s-24 10.7-24 24v14.4l-52.9-74.1C496 86.5 452.4 64 405.9 64H272 256 192 144C77.7 64 24 117.7 24 184v54C9.4 249.8 0 267.8 0 288v17.6c0 8 6.4 14.4 14.4 14.4C46.2 320 72 294.2 72 262.4V256 224 184c0-24.3 12.1-45.8 30.5-58.9C98.3 135.9 96 147.7 96 160v64zM560 336a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zM166.6 166.6c-4.2-4.2-6.6-10-6.6-16c0-12.5 10.1-22.6 22.6-22.6H361.4c12.5 0 22.6 10.1 22.6 22.6c0 6-2.4 11.8-6.6 16l-23.4 23.4C332.2 211.8 302.7 224 272 224s-60.2-12.2-81.9-33.9l-23.4-23.4z" />
-        </svg>
-        <p>Fence</p>
-      </div>
-
-      <div class="navbar-items">
-        <!-- Positioning Management -->
-        <div class="navbar-header" style="margin-top: 30px">Positioning Management</div>
-        <div class="navbar-item marker-controls">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M16 144a144 144 0 1 1 288 0A144 144 0 1 1 16 144zM160 80c8.8 0 16-7.2 16-16s-7.2-16-16-16c-53 0-96 43-96 96c0 8.8 7.2 16 16 16s16-7.2 16-16c0-35.3 28.7-64 64-64zM128 480V317.1c10.4 1.9 21.1 2.9 32 2.9s21.6-1 32-2.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32z" />
-          </svg>
-          Marker Controls
-        </div>
-        <div class="navbar-item virtual-fence">
-          <svg xmlns="http://www.w3.org/2000/svg" style="position: relative; top: 2px" viewBox="0 0 448 512">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M96 151.4V360.6c9.7 5.6 17.8 13.7 23.4 23.4H328.6c0-.1 .1-.2 .1-.3l-4.5-7.9-32-56 0 0c-1.4 .1-2.8 .1-4.2 .1c-35.3 0-64-28.7-64-64s28.7-64 64-64c1.4 0 2.8 0 4.2 .1l0 0 32-56 4.5-7.9-.1-.3H119.4c-5.6 9.7-13.7 17.8-23.4 23.4zM384.3 352c35.2 .2 63.7 28.7 63.7 64c0 35.3-28.7 64-64 64c-23.7 0-44.4-12.9-55.4-32H119.4c-11.1 19.1-31.7 32-55.4 32c-35.3 0-64-28.7-64-64c0-23.7 12.9-44.4 32-55.4V151.4C12.9 140.4 0 119.7 0 96C0 60.7 28.7 32 64 32c23.7 0 44.4 12.9 55.4 32H328.6c11.1-19.1 31.7-32 55.4-32c35.3 0 64 28.7 64 64c0 35.3-28.5 63.8-63.7 64l-4.5 7.9-32 56-2.3 4c4.2 8.5 6.5 18 6.5 28.1s-2.3 19.6-6.5 28.1l2.3 4 32 56 4.5 7.9z" />
-          </svg>
-          Virtual Fence
-        </div>
-
-        <!-- Cattle Tracking -->
-        <div class="navbar-header">Cattle Tracking</div>
-        <div class="navbar-item map-view">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77V504.3L192 449.4V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
-          </svg>
-          Map View
-        </div>
-        <div class="navbar-item statistics">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-          </svg>
-          Statistics
-        </div>
-        <div class="navbar-item markers-history">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-          </svg>
-          Markers History
-        </div>
-
-        <!-- Cattle Counting -->
-        <div class="navbar-header">Cattle Face Recognition & Counting</div>
-        <div class="navbar-item cattle-counting" onclick="redirectCC()">
-          <img src="images/maximize.png" alt="" />
-          Redirect
-        </div>
-
-        <!-- Account Management -->
-        <div class="navbar-header">Account Management</div>
-        <div class="navbar-item log-out">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 512 512"
-            style="position: relative; top: 2px">
-            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#E51A1C"
-              d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" />
-          </svg>
-          Log Out
+        <div class="alert-content">
+          <p>Cow <span></span> is out of the fence!</p>
+          <div class="alert-button">
+            <button class="shadow" onclick="">Confirm</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Map Section -->
-    <div class="map-flex">
-      <div id="map-canvas" style="height: 100vh; width: 100%"></div>
-    </div>
-
-    <!-- Control-bar Section -->
-    <div class="map-control">
-      <div class="map-control-header">
-        <div class="tab-arrow orange-hover">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 448 512">
+    <div id="body-flex">
+      <!-- Navbar Section -->
+      <div class="navbar">
+        <div class="web-logo">
+          <p>Virtual</p>
+          <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 640 512">
             <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-            <path fill="#d2d2d2"
-              d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z" />
+            <path
+              fill="#d2d2d2"
+              d="M96 224v32V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V327.8c9.9 6.6 20.6 12 32 16.1V368c0 8.8 7.2 16 16 16s16-7.2 16-16V351.1c5.3 .6 10.6 .9 16 .9s10.7-.3 16-.9V368c0 8.8 7.2 16 16 16s16-7.2 16-16V343.8c11.4-4 22.1-9.4 32-16.1V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V256l32 32v49.5c0 9.5 2.8 18.7 8.1 26.6L530 427c8.8 13.1 23.5 21 39.3 21c22.5 0 41.9-15.9 46.3-38l20.3-101.6c2.6-13-.3-26.5-8-37.3l-3.9-5.5V184c0-13.3-10.7-24-24-24s-24 10.7-24 24v14.4l-52.9-74.1C496 86.5 452.4 64 405.9 64H272 256 192 144C77.7 64 24 117.7 24 184v54C9.4 249.8 0 267.8 0 288v17.6c0 8 6.4 14.4 14.4 14.4C46.2 320 72 294.2 72 262.4V256 224 184c0-24.3 12.1-45.8 30.5-58.9C98.3 135.9 96 147.7 96 160v64zM560 336a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zM166.6 166.6c-4.2-4.2-6.6-10-6.6-16c0-12.5 10.1-22.6 22.6-22.6H361.4c12.5 0 22.6 10.1 22.6 22.6c0 6-2.4 11.8-6.6 16l-23.4 23.4C332.2 211.8 302.7 224 272 224s-60.2-12.2-81.9-33.9l-23.4-23.4z"
+            />
           </svg>
+          <p>Fence</p>
         </div>
-        <b>Controls</b>
-      </div>
 
-      <!-- Marker Controls -->
-      <div class="map-latlng-control control-padding control-item">
-        <div class="controls-header">Marker Mover</div>
-        <form>
-          Latitude:
-          <input style="margin-left: 14px; width: 170px" type="text" id="lat" /><br />
-          Longitude:
-          <input style="width: 170px" type="text" id="lng" /><br />
-        </form>
+        <div class="navbar-items">
+          <!-- Positioning Management -->
+          <div class="navbar-header" style="margin-top: 30px">Positioning Management</div>
+          <div class="navbar-item marker-controls">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#d2d2d2"
+                d="M16 144a144 144 0 1 1 288 0A144 144 0 1 1 16 144zM160 80c8.8 0 16-7.2 16-16s-7.2-16-16-16c-53 0-96 43-96 96c0 8.8 7.2 16 16 16s16-7.2 16-16c0-35.3 28.7-64 64-64zM128 480V317.1c10.4 1.9 21.1 2.9 32 2.9s21.6-1 32-2.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32z"
+              />
+            </svg>
+            Marker Controls
+          </div>
+          <div class="navbar-item virtual-fence">
+            <svg xmlns="http://www.w3.org/2000/svg" style="position: relative; top: 2px" viewBox="0 0 448 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#d2d2d2"
+                d="M96 151.4V360.6c9.7 5.6 17.8 13.7 23.4 23.4H328.6c0-.1 .1-.2 .1-.3l-4.5-7.9-32-56 0 0c-1.4 .1-2.8 .1-4.2 .1c-35.3 0-64-28.7-64-64s28.7-64 64-64c1.4 0 2.8 0 4.2 .1l0 0 32-56 4.5-7.9-.1-.3H119.4c-5.6 9.7-13.7 17.8-23.4 23.4zM384.3 352c35.2 .2 63.7 28.7 63.7 64c0 35.3-28.7 64-64 64c-23.7 0-44.4-12.9-55.4-32H119.4c-11.1 19.1-31.7 32-55.4 32c-35.3 0-64-28.7-64-64c0-23.7 12.9-44.4 32-55.4V151.4C12.9 140.4 0 119.7 0 96C0 60.7 28.7 32 64 32c23.7 0 44.4 12.9 55.4 32H328.6c11.1-19.1 31.7-32 55.4-32c35.3 0 64 28.7 64 64c0 35.3-28.5 63.8-63.7 64l-4.5 7.9-32 56-2.3 4c4.2 8.5 6.5 18 6.5 28.1s-2.3 19.6-6.5 28.1l2.3 4 32 56 4.5 7.9z"
+              />
+            </svg>
+            Virtual Fence
+          </div>
 
-        <div class="map-latlng-button-flex control-padding">
-          <button class="shadow orange-hover" onclick="moveMarker()">Move!</button>
-          <button class="shadow orange-hover" onclick="moveMarkerESP()">Get Board Location</button>
+          <!-- Cattle Tracking -->
+          <div class="navbar-header">Cattle Tracking</div>
+          <div class="navbar-item markers-history">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#d2d2d2"
+                d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77V504.3L192 449.4V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"
+              />
+            </svg>
+            Markers History
+          </div>
+          <div class="navbar-item statistics">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#d2d2d2"
+                d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"
+              />
+            </svg>
+            Statistics
+          </div>
+
+          <!-- Cattle Counting -->
+          <div class="navbar-header">Cattle Face Recognition & Counting</div>
+          <div class="navbar-item cattle-counting" onclick="redirectCC()">
+            <img src="images/maximize.png" alt="" />
+            Redirect
+          </div>
+
+          <!-- Account Management -->
+          <div class="navbar-header">Account Management</div>
+          <div class="navbar-item log-out">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 0 512 512"
+              style="position: relative; top: 2px"
+            >
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#E51A1C"
+                d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"
+              />
+            </svg>
+            Log Out
+          </div>
         </div>
       </div>
 
-      <!-- Fence Controls -->
-      <div class="map-fence-control control-padding control-item hidden">
-        <span class="controls-header">Vertices of Polygon Fence:</span>
-        <div id="polygon-coords"></div>
+      <!-- Map Section -->
+      <div class="map-flex">
+        <div id="map-canvas" style="height: 100vh; width: 100%"></div>
       </div>
 
-      <!-- Table Controls -->
-      <div class="map-pos-table control-padding control-item hidden">
-        <table>
-          <tr>
-            <th>Board_Number</th>
-            <th class="table-coords-data">Langtitude</th>
-            <th class="table-coords-data">Longitude</th>
-          </tr>
-          <tbody id="map-pos-table-data"></tbody>
-        </table>
+      <!-- Control-bar Section -->
+      <div class="map-control">
+        <div class="map-control-header">
+          <div class="tab-arrow orange-hover">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 448 512">
+              <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+              <path
+                fill="#d2d2d2"
+                d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z"
+              />
+            </svg>
+          </div>
+          <b>Controls</b>
+        </div>
+
+        <!-- Marker Controls -->
+        <div class="map-latlng-control control-padding control-item">
+          <div class="controls-header">Marker Mover</div>
+          <form>
+            Latitude:
+            <input style="margin-left: 14px; width: 170px" type="text" id="lat" /><br />
+            Longitude:
+            <input style="width: 170px" type="text" id="lng" /><br />
+          </form>
+
+          <div class="map-latlng-button-flex control-padding">
+            <button class="shadow orange-hover" onclick="moveMarker()">Move!</button>
+            <button class="shadow orange-hover" onclick="moveMarkerESP()">Get Board Location</button>
+          </div>
+        </div>
+
+        <!-- Fence Controls -->
+        <div class="map-fence-control control-padding control-item hidden">
+          <span class="controls-header">Vertices of Polygon Fence:</span>
+          <div id="polygon-coords"></div>
+        </div>
+
+        <!-- Table Controls -->
+        <div class="map-pos-table control-padding control-item hidden">
+          <table>
+            <tr>
+              <th>Board_Number</th>
+              <th class="table-coords-data">Langtitude</th>
+              <th class="table-coords-data">Longitude</th>
+            </tr>
+            <tbody id="map-pos-table-data"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm9Z8VmCnuxalMq5AkkTi0xqwdFEWQfXU&libraries=drawing,geometry"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="js/drawMap.js"></script>
-  <script src="js/main.js"></script>
-</body>
-
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm9Z8VmCnuxalMq5AkkTi0xqwdFEWQfXU&libraries=drawing,geometry"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/drawMap.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
