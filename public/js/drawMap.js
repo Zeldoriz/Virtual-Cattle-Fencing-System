@@ -8,6 +8,7 @@ var prevLoc = [];
 var lat, lng;
 var marker;
 var markers = [];
+var markers_history = [];
 
 var coordinates = [];
 let new_coordinates = [];
@@ -248,7 +249,7 @@ function moveMarker() {
 
   let tempLoc = { lat: lat, lng: lng };
   //Update gps data in server
-  $.get("/updateData", tempLoc, function () {});
+  $.get("/updateData", tempLoc, function () { });
 
   console.log("Marker moved manually!");
 }
@@ -266,14 +267,70 @@ function moveMarkerESP() {
   });
 }
 
-async function updateMarker(newmarker, local_board_number, the_map) {
+function submitText() {
+  var text = document.getElementById("board_number").value;
+  console.log("Submitted Board Number:", text);
+  query_marker_his(text);
+}
+
+async function query_marker_his(board_number) {
+  const dataToSend = { bn: board_number };
+
+  for (let i = 0; i < Object.keys(markers_history).length; i++) {
+    markers_history[i].setMap(null);
+  }
+
+  fetch("/DataNum", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataToSend),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Data received from server:", data);
+
+      var num;
+
+      for (let i = 1; i <= 5; i++) {
+        markers[i].setMap(null);
+      }
+      if (Object.keys(data).length > 5) {
+        num = 5;
+      }
+      else {
+        num = Object.keys(data).length;
+      }
+      console.log(num);
+
+      for (let i = 0; i < num; i++) {
+        updateMarker(data[i], i, map, markers_history);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function go_back_Live() {
+  for (let i = 0; i < Object.keys(markers_history).length; i++) {
+    markers_history[i].setMap(null);
+  }
+
+  for (let i = 1; i <= Object.keys(markers).length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+async function updateMarker(newmarker, local_board_number, the_map, arr) {
   const marker = new google.maps.Marker({
     map: the_map,
     position: { lat: newmarker.lat, lng: newmarker.lng },
-    label: { color: "#000000", fontWeight: "bold", fontSize: "14px", text: "Board " + local_board_number },
+    label: { color: "#000000", fontWeight: "bold", fontSize: "14px", text: "Board " + newmarker.board_number },
   });
   marker.setMap(the_map);
-  markers[local_board_number] = marker;
+  arr[local_board_number] = marker;
   console.log("Adding marker");
 }
 
@@ -283,7 +340,7 @@ setInterval(() => {
       if (data[i].lat != prevLoc[i].lat || data[i].lng != prevLoc[i].lng) {
         markers[data[i].board_number].setMap(null);
         prevLoc[i] = { lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng) };
-        updateMarker(data[i], data[i].board_number, map);
+        updateMarker(data[i], data[i].board_number, map, markers);
       }
     }
     console.log("Marker moved automatically!");

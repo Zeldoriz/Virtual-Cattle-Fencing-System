@@ -8,15 +8,13 @@ dotenv.config();
 // console.log(process.env.mysql_user);
 // console.log(process.env.mysql_pass);
 
-const pool = mysql
-  .createPool({
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "rootdb",
-    database: "my_database",
-  })
-  .promise();
+const pool = mysql.createPool({
+  host: 'localhost',
+  port: '3306',
+  user: 'root',
+  password: 'christopher1410',
+  database: 'my_database'
+}).promise()
 
 async function getAllData() {
   const [result] = await pool.query("SELECT * FROM board");
@@ -81,7 +79,7 @@ async function changeData(boardNUM, lat, lng) {
 //     return result;
 // }
 async function usage(number) {
-  const data = await getAllLastData();
+  const data = await getAllDataofBoard(number);
   console.log(data);
 }
 export { getAllData, getData, createData, changeData, getLastData, getAllLastData, getAllDataofBoard };

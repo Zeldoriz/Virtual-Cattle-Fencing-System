@@ -124,6 +124,15 @@ app.get("/updateData", function (req, res) {
   console.log(posLog);
 });
 
+app.post("/DataNum", async function (req, res) {
+  // ini kenapa cok kok req.board_number undefine
+  // console.log(req.board_number);
+  // const parsed = JSON.parse(req.body);
+  // console.log(parsed);
+  const data = await lib.getAllDataofBoard(req.body.bn);
+  res.json(data);
+});
+
 // Endpoint to handle the incoming data from index.js
 app.post("/api/endpoint", (req, res) => {
   polygon.coords = req.body.coords;
